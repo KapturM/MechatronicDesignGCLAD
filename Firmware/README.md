@@ -1,6 +1,10 @@
 # Useful commands
 
 ```
+docker build -t env-esp-idf -f Dockerfile.esp-idf --build-arg HOSTNAME=$(hostname) .
+```
+
+```
 idf.py set-target esp32
 idf.py build
 ```
