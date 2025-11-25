@@ -1,0 +1,27 @@
+{
+    "name": "ESP-IDF Development Environment",
+    "image": "env-esp-idf",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.hexeditor"
+            ]
+        }
+    },
+    "workspaceMount": "source=${localWorkspaceFolder}/workspace,target=/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/workspace",
+    "runArgs": [
+        "--rm",
+        "-it",
+        "--network=bridge",
+        "-p", "3333:3333",
+        "-p", "1883:1883",
+        "-p", "8080:8080",
+        "-p", "8081:8081",
+        "-p", "8800:8800",
+        "-p", "8883:8883"
+    ],
+    "remoteUser": "root"
+}
