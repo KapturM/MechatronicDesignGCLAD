@@ -145,12 +145,14 @@ void app_main(void)
             if (strcmp(data, "LED ON") == 0) {
                 uart_write_bytes(UART_PORT, "LED TURNED ON\r\n", 16);
                 for (int led = 0; led < EXAMPLE_LED_NUMBERS; led++) {
+
+                ESP_LOGI(TAG, "getting ready...");
                 // Build RGB pixels. Each color is an offset sine, which gives a
                 // hue-like effect.
                 led_strip_pixels[led * 3 + 0] = 0;
                 led_strip_pixels[led * 3 + 1] = 255;
                 led_strip_pixels[led * 3 + 2] = 0;
-                ESP_LOGI(TAG, "getting ready...");
+                
                 vTaskDelay(pdMS_TO_TICKS(3*1000));
                 ESP_LOGI(TAG, "READY ON");
         }
@@ -158,12 +160,14 @@ void app_main(void)
             } else if (strcmp(data, "LED OFF") == 0) {
                 uart_write_bytes(UART_PORT, "LED TURNED OFF\r\n", 17);
                 for (int led = 0; led < EXAMPLE_LED_NUMBERS; led++) {
+
+                ESP_LOGI(TAG, "getting ready...");
                 // Build RGB pixels. Each color is an offset sine, which gives a
                 // hue-like effect.
                 led_strip_pixels[led * 3 + 0] = 255;
                 led_strip_pixels[led * 3 + 1] = 0;
                 led_strip_pixels[led * 3 + 2] = 0;
-                ESP_LOGI(TAG, "getting ready...");
+               
                 vTaskDelay(pdMS_TO_TICKS(3*1000));
                 ESP_LOGI(TAG, "READY ON");
         }
