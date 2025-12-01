@@ -61,7 +61,7 @@ void servo_set_speed(servo_t *servo, uint32_t step_deg, uint32_t delay_ms)
     if (step_deg == 0) step_deg = 1;
     servo->step_deg = step_deg;
     servo->step_delay_ms = delay_ms;
-    printf("Servo %d speed set: %u deg/step, %u ms delay",servo->channel, step_deg, delay_ms);
+    printf("Servo %d speed set: %ld deg/step, %ld ms delay",servo->channel, step_deg, delay_ms);
     printf("Servo %d speed configured!", servo->channel);
 }
 
@@ -84,7 +84,7 @@ void servo_set_angle(servo_t *servo, uint32_t angle)
 // ----- Speed controlled movement -----
 void servo_move_slow(servo_t *servo, uint32_t target_angle)
 {
-    printf('Servo %d start movement.',servo->channel);
+    printf("Servo %d start movement.",servo->channel);
     if (target_angle > 180) target_angle = 180;
 
     int current = servo->current_angle;
@@ -103,5 +103,5 @@ void servo_move_slow(servo_t *servo, uint32_t target_angle)
         servo_set_angle(servo, current);
         vTaskDelay(pdMS_TO_TICKS(servo->step_delay_ms));
     }
-    printf('Servo %d finished movement.',servo->channel);
+    printf("Servo %d finished movement.",servo->channel);
 }
