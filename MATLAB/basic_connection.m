@@ -1,9 +1,11 @@
 clear 
 close all 
+clc
+
 
 
 % connect with esp 
-esp = serialport("COM9", 115200);
+esp = serialport("COM8", 115200);
 configureTerminator(esp, "CR/LF");
 %% send ON command
 writeline(esp, "LED ON");
@@ -36,11 +38,11 @@ while (1)
     if buff > 0
         response = readline(esp)
 
-        if response == "LED TURNED ON"
+        if response == "Hello, Blinky! LED ON"
             writeline(esp, "LED OFF");
         end
 
-        if response == "LED TURNED OFF"
+        if response == "Hello, Blinky! LED OFF"
             writeline(esp, "LED ON");
         end
     end
