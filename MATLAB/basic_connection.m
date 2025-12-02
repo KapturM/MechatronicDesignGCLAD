@@ -40,11 +40,11 @@ while (1)
     if buff > 0
         response = readline(esp)
 
-        if response == "Hello, Blinky! LED ON"
+        if response == "LED=1"
             writeline(esp, "LED OFF");
         end
 
-        if response == "Hello, Blinky! LED OFF"
+        if response == "LED=0"
             writeline(esp, "LED ON");
         end
     end
