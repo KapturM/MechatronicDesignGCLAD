@@ -14,7 +14,7 @@ response = readline(esp)
 
 %% Servo commands
 %% 
-writeline(esp, "SERVO MOVE: 1, 160");
+writeline(esp, "SERVO MOVE: 2, 110");
 response = readline(esp)
 
 
