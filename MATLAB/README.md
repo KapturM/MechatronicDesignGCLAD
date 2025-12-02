@@ -6,26 +6,26 @@
 2. If you mess up and Pico is not detected, disconnect the pico `disconnect(ps2000DeviceObj);`. Make sure that DeviceObj wasn't cleared. It should work, if not restart your computer.
 
 ## PicoScope Matlab Configuration
-
+<br>
 This configuration is for Windows only.
-
+<br>
 1. Download and Install SDK
 https://www.picotech.com/downloads
-
-PicoScope2000 -> 2205A -> PicoSDK
-Install the SDK. Might require a restart.
+<br>
+PicoScope2000 -> 2205A -> PicoSDK <br>
+Install the SDK. Might require a restart. <br>
 
 2. Download and export PicoSDK C Wrappers
 https://github.com/picotech/picosdk-c-wrappers-binaries
-
-Download appropriate wrapper version.
-Go to `C:\Program Files\Pico Technology\SDK\lib`
-Export Wrappers here (Or whenever your SDK is installed)
+<br>
+Download appropriate wrapper version. <br>
+Go to `C:\Program Files\Pico Technology\SDK\lib` <br>
+Export Wrappers here (Or whenever your SDK is installed) <br>
 
 3. Install Required MATLAB Add-ons
-To install add-ons:
+To install add-ons: <br>
 MATLAB -> APPS -> Get More Apps
-
+<br>
 In search, clear all filters.
 Search and install:
 * *PicoScope Support Toolbox* https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox
