@@ -7,29 +7,30 @@
 
 ## PicoScope Matlab Configuration
 <br>
-This configuration is for Windows only.
-<br>
+This configuration is for Windows only. <br>
+
 1. Download and Install SDK
-https://www.picotech.com/downloads
-<br>
+https://www.picotech.com/downloads <br>
+
 PicoScope2000 -> 2205A -> PicoSDK <br>
 Install the SDK. Might require a restart. <br>
 
 2. Download and export PicoSDK C Wrappers
-https://github.com/picotech/picosdk-c-wrappers-binaries
-<br>
+https://github.com/picotech/picosdk-c-wrappers-binaries <br>
+
 Download appropriate wrapper version. <br>
 Go to `C:\Program Files\Pico Technology\SDK\lib` <br>
 Export Wrappers here (Or whenever your SDK is installed) <br>
 
 3. Install Required MATLAB Add-ons
 To install add-ons: <br>
-MATLAB -> APPS -> Get More Apps
-<br>
-In search, clear all filters.
+MATLAB -> APPS -> Get More Apps <br>
+
+In search, clear all filters. <br>
 Search and install:
 * *PicoScope Support Toolbox* https://uk.mathworks.com/matlabcentral/fileexchange/53681-picoscope-support-toolbox
 * *PicoScope 2000 Series MATLAB Generic Instrument Driver* https://www.mathworks.com/matlabcentral/fileexchange/40134-picoscope-2000-series-matlab-generic-instrument-driver <br>
+
 !Important! Make sure that 2000 Series is installed and NOT the 2000A API. 2000A API does NOT support PicoScope 2205A!
 
 
