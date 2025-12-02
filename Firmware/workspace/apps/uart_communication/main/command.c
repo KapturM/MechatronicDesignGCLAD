@@ -39,6 +39,29 @@ Command parse_command(const char *input)
         return cmd;
     }
 
+
+    // --- SERVO SET SPEED: id, step_deg, delay ---
+    if (strncmp(input, "SERVO SET SPEED:", 16) == 0) {
+
+        int id = 0;
+        int step = 0;
+        int delay = 0;
+
+        // Parse pattern:
+        // SERVO SET SPEED: 1, 3, 20
+        if (sscanf(input + 16, "%d , %d , %d", &id, &step, &delay) == 3) {
+            cmd.type = CMD_SERVO_SET_SPEED;
+            cmd.p1 = id;
+            cmd.p2 = step;
+            cmd.p3 = delay;
+            return cmd;
+        }
+
+        cmd.type = CMD_UNKNOWN;
+        return cmd;
+    }
+
+
     // No match
     return cmd;
 }
