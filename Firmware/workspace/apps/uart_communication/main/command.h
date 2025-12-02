@@ -4,7 +4,14 @@ typedef enum {
     CMD_NONE = 0,
     CMD_LED_ON,
     CMD_LED_OFF,
+    CMD_SERVO_MOVE,
     CMD_UNKNOWN
 } CommandType;
 
-CommandType check_for_commands(const char *input);
+typedef struct {
+    CommandType type;
+    int p1;
+    int p2;
+} Command;
+
+Command parse_command(const char *input);

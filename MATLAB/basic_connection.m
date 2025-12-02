@@ -13,6 +13,13 @@ response = readline(esp)
 %% send OFF command 
 writeline(esp, "LED OFF");
 response = readline(esp)
+
+%% Servo commands
+%% 
+writeline(esp, "SERVO MOVE: 1, 160");
+response = readline(esp)
+
+
 %% 
 response = readline(esp)
 

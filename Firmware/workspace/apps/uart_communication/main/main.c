@@ -27,14 +27,14 @@ void app_main(void)
 
     char rx_buffer[UART_BUF_SIZE];
 
-    while (1) {
+     while (1) {
 
-        int len = uart_read_line(rx_buffer, UART_BUF_SIZE, FRAME_DURATION_MS);
-
+        int len = uart_read_line(rx_buffer, UART_BUF_SIZE, 50);
         if (len > 0) {
-            CommandType cmd = check_for_commands(rx_buffer);
 
-            switch (cmd) {
+            Command cmd = parse_command(rx_buffer);
+
+            switch(cmd.type) {
 
             case CMD_LED_ON:
                 gpio_set_level(LED_PIN, 1);
@@ -44,6 +44,16 @@ void app_main(void)
             case CMD_LED_OFF:
                 gpio_set_level(LED_PIN, 0);
                 uart_send("LED=0\n");
+                break;
+
+            case CMD_SERVO_MOVE:
+                // cmd.p1 = servo ID
+                // cmd.p2 = angle
+                printf("MOVING SERVO %d TO %d deg\n", cmd.p1, cmd.p2);
+
+                // TODO: Call your servo driver
+                // servo_move(cmd.p1, cmd.p2);
+
                 break;
 
             default:
