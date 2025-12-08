@@ -19,7 +19,7 @@ This configuration is for Windows only. <br>
 
     Download appropriate wrapper version. <br>
     Go to `C:\Program Files\Pico Technology\SDK\lib` <br>
-    Export Wrappers here (Or whenever your SDK is installed) <br>
+    Export Wrappers here (Or wherever your SDK is installed) <br>
 
 3. Install Required MATLAB Add-ons
     To install add-ons: <br>

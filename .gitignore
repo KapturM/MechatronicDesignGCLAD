@@ -10,3 +10,4 @@
 **/sdkconfig.projbuild.bak
 *.lock
 *.asv
+*.csv
