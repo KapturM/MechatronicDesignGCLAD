@@ -9,3 +9,4 @@
 **/sdkconfig.projbuild.defaults
 **/sdkconfig.projbuild.bak
 *.lock
+*/models/gcode/
