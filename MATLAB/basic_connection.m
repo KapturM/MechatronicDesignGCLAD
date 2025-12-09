@@ -2,8 +2,6 @@ clear
 close all 
 clc
 
-
-
 % connect with esp 
 esp = serialport("COM8", 115200);
 configureTerminator(esp, "CR/LF");
