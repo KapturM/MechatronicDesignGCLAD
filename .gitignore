@@ -9,9 +9,6 @@
 **/sdkconfig.projbuild.defaults
 **/sdkconfig.projbuild.bak
 *.lock
-<<<<<<< HEAD
-*/models/gcode/
-=======
 *.asv
 *.csv
->>>>>>> c0a7011a292bc02df71553fde6e1ca423b632a44
+*.gcode
