@@ -12,3 +12,4 @@
 *.asv
 *.csv
 FullScanGrid*.mat
+*.gcode
