@@ -1,15 +1,17 @@
-function updateRasterUI(uiMap, xi, yi, x_pos, y_pos, rowNum, numRows, measurementCount, totalPoints)
-    % updateRasterUI - prints a colored ASCII map using cprintf
-    %
-    % uiMap           -> current map of 'o' (pending) and 'x' (measured)
-    % xi, yi          -> current column/row being measured
-    % x_pos, y_pos    -> coordinates in mm
-    % rowNum, numRows -> current row and total rows
-    % measurementCount, totalPoints -> progress info
+% Prints a colored ASCII map using cprintf
+%
+% uiMap           -> current map of 'o' (pending) and 'x' (measured)
+% xi, yi          -> current column/row being measured
+% x_pos, y_pos    -> coordinates in mm
+% rowNum, numRows -> current row and total rows
+% measurementCount, totalPoints -> progress info
 
+function updateRasterUI(uiMap, xi, yi, x_pos, y_pos, rowNum, numRows, measurementCount, totalPoints)
     % Clear command window
     clc;
-    
+    drawnow;
+    pause(0.001);
+
     % Progress
     progressPercent = measurementCount / totalPoints * 100;
     
