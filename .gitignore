@@ -11,3 +11,4 @@
 *.lock
 *.asv
 *.csv
+FullScanGrid*.mat
