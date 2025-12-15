@@ -5,13 +5,11 @@ clc
 %% Load Configuration Information
 PS2000Config;
 
-% Load CSV
-awg = [ones(1, round(10e-6 * 5e6)), zeros(1, 4096 - round(10e-6 * 5e6))];
-
 
 %% Device Connection
 ps2000DeviceObj = icdevice('picotech_ps2000_generic.mdd');
 connect(ps2000DeviceObj);
+
 
 %% Device Configuration
 disp('Device Configuration...')
@@ -46,7 +44,26 @@ timebaseIndex = get(blockGroupObj, 'timebase');
 % Set the number of samples to collect.
 set(ps2000DeviceObj, 'numberOfSamples', 2048);
 
-%% AWG
+
+%% Set simple trigger:
+
+% Set the trigger delay to 30% (samples will be shown either side of the
+% trigger point.
+set(triggerGroupObj, 'delay', -30.0);
+
+% Set the autoTriggerMs property in order to automatically trigger the
+% oscilloscope after 1 second if a trigger event has not occurred. Set to 0
+% to wait indefinitely for a trigger event.
+set(triggerGroupObj, 'autoTriggerMs', 1000);
+
+% Parameters taken from config file loaded into workspace.
+
+[simpleTriggerStatus] = invoke(triggerGroupObj, 'setSimpleTrigger', ...
+    ps2000ConfigInfo.simpleTrigger.source, ps2000ConfigInfo.simpleTrigger.threshold, ...
+    ps2000ConfigInfo.simpleTrigger.direction);
+
+
+%% Define AWG
 disp('Generating Signal...')
 sigGenGroupObj = get(ps2000DeviceObj, 'Signalgenerator');
 sigGenGroupObj = sigGenGroupObj(1);
@@ -64,26 +81,14 @@ set(sigGenGroupObj, 'offsetVoltage', 0);
 set(sigGenGroupObj, 'peakToPeakVoltage', 2000);
 set(sigGenGroupObj, 'startFrequency', 1000);
 
+
+awg = [ones(1, round(10e-6 * 5e6)), zeros(1, 4096 - round(10e-6 * 5e6))];
+
+
+%% Start AWG
+disp('AWG Start...')
 [status.sigGenArbitrary] = invoke(sigGenGroupObj, 'ps2000SetSigGenArbitrary', ...
     1, 0, awg, 0, 0);
-
-
-%% Set simple trigger:
-
-% Set the trigger delay to 50% (samples will be shown either side of the
-% trigger point.
-set(triggerGroupObj, 'delay', -30.0);
-
-% Set the autoTriggerMs property in order to automatically trigger the
-% oscilloscope after 1 second if a trigger event has not occurred. Set to 0
-% to wait indefinitely for a trigger event.
-set(triggerGroupObj, 'autoTriggerMs', 1000);
-
-% Parameters taken from config file loaded into workspace.
-
-[simpleTriggerStatus] = invoke(triggerGroupObj, 'setSimpleTrigger', ...
-    ps2000ConfigInfo.simpleTrigger.source, ps2000ConfigInfo.simpleTrigger.threshold, ...
-    ps2000ConfigInfo.simpleTrigger.direction);
 
 
 %% Data Collection
@@ -97,8 +102,8 @@ disp('Data collection complete.');
 stopStatus = invoke(ps2000DeviceObj, 'ps2000Stop');
 
 
-%% Turn off AWG
-
+%% Stop AWG
+disp('AWG Stop...')
 set(sigGenGroupObj, 'offsetVoltage', 0);
 set(sigGenGroupObj, 'peakToPeakVoltage', 0);
 
@@ -130,3 +135,5 @@ grid on;
 %% Disconnect
 disconnect(ps2000DeviceObj);
 delete(ps2000DeviceObj);
+
+

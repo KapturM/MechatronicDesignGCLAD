@@ -1,6 +1,6 @@
-# MATLAB
+# Data Aquisition and Control
 
-## Tips for API
+## Tips for PicoScope API
 
 1. Before running ANY API related function, make sure that `PS2000Config;` was initialized. Otherwise nothing will work.
 2. If you mess up and get an error using the code, **DO NOT RUN ANYTHING!**, disconnect the pico using command window: `disconnect(ps2000DeviceObj);`. Make sure that DeviceObj wasn't cleared. It should work, if not restart your computer.

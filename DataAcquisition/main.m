@@ -3,8 +3,8 @@ clear all; close all; clc;
 
 
 %% ================== User Parameters ==================
-x_start = 0; x_end = 6; x_step = 2;     % X in mm
-y_start = 0; y_end = 6; y_step = 2;     % Y in mm
+x_start = 0; x_end = 10; x_step = 2;     % X in mm
+y_start = 0; y_end = 10; y_step = 2;     % Y in mm
 measurementsPerPoint = 10;
 measurementSize = 2048;                 % Number of samples per measurement
 fs = 1e6;                               % 1MHz Frequency sampling
