@@ -1,3 +1,4 @@
+addpath('functions\')
 safeDisconnectPico();
 clear all; close all; clc;
 
@@ -38,6 +39,7 @@ pause(1)
 disp('Device Initialization...')
 PS2000Config;
 ps2000DeviceObj = icdevice('picotech_ps2000_generic.mdd');
+
 connect(ps2000DeviceObj);
 
 pause(1)
