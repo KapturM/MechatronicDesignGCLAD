@@ -11,6 +11,16 @@
 #define LED_PIN GPIO_NUM_2
 #define FRAME_DURATION_MS 20
 
+//#define TAG "HC_SR04"
+
+// GPIO configuration
+#define TRIG_GPIO GPIO_NUM_5
+//#define ECHO_GPIO 18
+
+#define TRIG_PULSE_US 10   // 10 microseconds pulse defined in HC-SR04 documentation 
+//#define MEASURE_INTERVAL_MS 1000
+#define TIMEOUT_US 100000  // 100 ms timeout for next trigger
+
 void app_main(void)
 {
     // Create two servo objects (from servo.c)
@@ -35,9 +45,21 @@ void app_main(void)
     };
     gpio_config(&io_conf);
 
+    // Configure LED
+    gpio_config_t io_conf_trig = {
+        .pin_bit_mask = 1ULL << GPIO_NUM_5,
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = 0,
+        .pull_down_en = 0,
+        .intr_type = GPIO_INTR_DISABLE
+    };
+    gpio_config(&io_conf_trig);
+
     char rx_buffer[UART_BUF_SIZE];
 
-     while (1) {
+    bool trigger_loop = false;
+
+    while (1) {
 
         int len = uart_read_line(rx_buffer, UART_BUF_SIZE, 50);
         if (len > 0) {
@@ -90,11 +112,39 @@ void app_main(void)
                     printf("Unknown servo ID!\n");
                 }
                 break;
+            case CMD_SEND_TRIGGER_ON:
+                // Ensure TRIG is low
+                gpio_set_level(TRIG_GPIO, 0);
+                gpio_set_level(LED_PIN, 0);
+                esp_rom_delay_us(2);
+                
+                gpio_set_level(LED_PIN, 1);
+                trigger_loop = true;
+                uart_send("TRIGGER LOOP ON\n");
+                break;
+            case CMD_SEND_TRIGGER_OFF:
+                trigger_loop = false;
+                gpio_set_level(TRIG_GPIO, 0);
+                gpio_set_level(LED_PIN, 0);
+                uart_send("TRIGGER STOPPED\n");
+                break;
                 
             default:
                 uart_send("UNKNOWN\n");
                 break;
             }
+        }
+
+        if (trigger_loop){
+            // Wait FRAME_DURATION_MS
+            vTaskDelay(pdMS_TO_TICKS(FRAME_DURATION_MS));
+            // Send next trigger
+            // Send 10 us pulse
+            gpio_set_level(TRIG_GPIO, 1);
+            esp_rom_delay_us(TRIG_PULSE_US);
+            gpio_set_level(TRIG_GPIO, 0);
+            uart_send("TRIGGER ACTION\n");
+            esp_rom_delay_us(TIMEOUT_US); // Wait before next trigger
         }
     }
 }

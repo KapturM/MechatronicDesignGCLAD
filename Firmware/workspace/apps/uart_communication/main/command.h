@@ -6,7 +6,9 @@ typedef enum {
     CMD_LED_OFF,
     CMD_SERVO_MOVE,
     CMD_SERVO_SET_SPEED,
-    CMD_UNKNOWN
+    CMD_UNKNOWN,
+    CMD_SEND_TRIGGER_ON,
+    CMD_SEND_TRIGGER_OFF
 } CommandType;
 
 typedef struct {

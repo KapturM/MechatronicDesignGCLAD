@@ -5,7 +5,7 @@
 
 Command parse_command(const char *input)
 {
-    Command cmd = { CMD_UNKNOWN, 0, 0 };
+    Command cmd = { CMD_UNKNOWN, 0, 0, 0};
 
     // --- LED Commands ---
     if (strcmp(input, "LED ON") == 0) {
@@ -58,6 +58,17 @@ Command parse_command(const char *input)
         }
 
         cmd.type = CMD_UNKNOWN;
+        return cmd;
+    }
+
+    // --- SEND TRIGGER ---
+    if (strcmp(input, "TRIGGER ON") == 0) {
+        cmd.type = CMD_SEND_TRIGGER_ON;
+        return cmd;
+    }
+
+    if (strcmp(input, "TRIGGER OFF") == 0) {
+        cmd.type = CMD_SEND_TRIGGER_OFF;
         return cmd;
     }
 
