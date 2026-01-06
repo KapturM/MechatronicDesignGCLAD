@@ -12,7 +12,7 @@ typedef struct {
     gpio_num_t enable_pin;
 
     int microsteps;
-    int step_delay_ms;
+    int step_delay_us;
 
     volatile int current_position;
     volatile int target_position;
@@ -25,7 +25,7 @@ void stepper_init(stepper_t *motor,
                   gpio_num_t step,
                   gpio_num_t dir,
                   gpio_num_t enable,
-                  int step_delay_ms,
+                  int step_delay_us,
                   int microsteps);
 
 void stepper_enable(stepper_t *motor);

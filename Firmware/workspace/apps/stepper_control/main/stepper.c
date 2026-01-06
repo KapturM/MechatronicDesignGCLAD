@@ -25,9 +25,9 @@ static void stepper_task(void *arg)
             for (int i = 0; i < total_steps; i++) {
                 // Step pulse
                 gpio_set_level(m->step_pin, 1);
-                vTaskDelay(pdMS_TO_TICKS(m->step_delay_ms));
+                esp_rom_delay_us(m->step_delay_us);
                 gpio_set_level(m->step_pin, 0);
-                vTaskDelay(pdMS_TO_TICKS(m->step_delay_ms));
+                esp_rom_delay_us(m->step_delay_us);
 
                 m->current_position += dir * (1.0f / m->microsteps);
             }
@@ -41,13 +41,13 @@ void stepper_init(stepper_t *m,
                   gpio_num_t step,
                   gpio_num_t dir,
                   gpio_num_t enable,
-                  int step_delay_ms,
+                  int step_delay_us,
                   int microsteps)
 {
     m->step_pin = step;
     m->dir_pin = dir;
     m->enable_pin = enable;
-    m->step_delay_ms = step_delay_ms;
+    m->step_delay_us = step_delay_us;
     m->microsteps = microsteps;
 
     m->current_position = 0;
@@ -70,7 +70,7 @@ void stepper_init(stepper_t *m,
     // Create command queue
     m->command_queue = xQueueCreate(4, sizeof(stepper_cmd_t));
 
-    // Create driver task
+    // Create task
     xTaskCreate(stepper_task, "stepper_task", 2048, m, 5, &m->task_handle);
 }
 

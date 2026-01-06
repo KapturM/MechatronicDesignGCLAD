@@ -9,8 +9,8 @@ stepper_t motor;
 
 void app_main(void)
 {
-    stepper_init(&motor, GPIO_NUM_18, GPIO_NUM_19, GPIO_NUM_15,
-                 500,   // ms pulse delay
+    stepper_init(&motor, GPIO_NUM_22, GPIO_NUM_23, GPIO_NUM_19,
+                 200,   // us pulse delay
                  1);   // microsteps
 
     while (1) {
