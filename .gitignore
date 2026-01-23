@@ -14,3 +14,12 @@
 FullScanGrid*.mat
 test*
 *.gcode
+**/ps2000WrapMFile_win64.m
+**/ps2000Wrap.lib
+**/ps2000Wrap.dll
+**/ps2000Wrap_thunk_pcwin64.dll
+**/ps2000MFile_win64.m
+**/PS2000Constants.m
+**/PS2000Config.m
+**/ps2000_thunk_pcwin64.dll
+**/picotech_ps2000_generic.mdd
