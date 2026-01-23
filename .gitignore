@@ -23,3 +23,4 @@ test*
 **/PS2000Config.m
 **/ps2000_thunk_pcwin64.dll
 **/picotech_ps2000_generic.mdd
+**/Contents.m
