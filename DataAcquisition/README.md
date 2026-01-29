@@ -1,4 +1,4 @@
-# Data Aquisition and Control
+# Data Acquisition and Control
 
 ## Tips for PicoScope API
 
